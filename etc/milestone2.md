@@ -47,6 +47,18 @@ a. class NPC
 
 ## Class Interface 3
 
-< add your interface >
+This is the class for the background - image is the main background image while the overlay and animated images
+serve more visual effects - for example desert tones + sandstorm, snowy area + blizzard, or any number of combinations
+
+a. class Background
+    i. attributes
+        1. image
+        2. overlay
+        3. animated_images
+    ii. methods
+        1. actual_movementx()
+        2. actual_movementy()
+        3. change_overlay_color_palette()
+        4. advance_animated_image()
 
 ======================================================================
