@@ -31,7 +31,7 @@
 ***        
 
 ## Program Design
-
+Our design would be similar to JRPG games mixed in with turn based attack/turns where you can explore areas of the map to complete objectives, fighting monsters along the way that block your path or ambush you. We are planning on using sprites to represent the player moving on a background map and entering a specific area will open up a new map where monsters and items will appear. 
 * Non-Standard libraries
     * << You should have a list of any additional libraries or modules used (pygame, request) beyond non-standard python. 
          For each additional module you should include
