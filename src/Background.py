@@ -12,9 +12,9 @@ class Background(pygame.sprite.Sprite):
     self.rect = self.background.get_rect()
 
   def replacebackground(self,new_primary_image=None,new_overlay_image=None,new_animated_image=None):
-  """
-  Intended to replace the background should the need arise
-  """  
+    """
+    Intended to replace the background should the need arise
+    """  
     self.background = pygame.image.load(new_primary_image).convert_alpha()
     self.overlay = pygame.image.load(new_overlay_image).convert_alpha()
     self.animated = pygame.image.load(new_animated_image).convert_alpha()

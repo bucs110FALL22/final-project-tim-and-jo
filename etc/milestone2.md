@@ -5,13 +5,12 @@
 The object that the Player controls
 
 a. class Player:
-
     i. attributes
         1. x
         2. y
         3. HP
-        4. MP/SP        
-    ii. nethods
+        4. MP/SP
+    ii. methods
         1. move_hori()
         2. move_vert()
         3. interact()
@@ -28,8 +27,8 @@ a. class NPC:
         2. y
         3. image
         4. type
-        4. HP
-        5. MP/SP
+        5. HP
+        6. MP/SP
     ii. methods
         1. move_hori()
         2. move_vert()
@@ -64,7 +63,7 @@ class Boss:
     4. image
     5. Multiple health bars
     6. Sp
-    8. Stat_increase
+    7. Stat_increase
   ii. method of movement
     1.no movement
     2. static encounter/encounter when entering boss room
