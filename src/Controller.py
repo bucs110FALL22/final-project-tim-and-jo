@@ -6,7 +6,7 @@ class Controller:
   def __init__(self):
     pygame.init()
     self.screen = pygame.display.set_mode()
-
+    self.state = "menu"
 
   def fight(berligerent1,berligerent2):
     """
@@ -19,3 +19,12 @@ class Controller:
     Intent - this goes first, then calls the fight method if those interacting are enemies
     """
     pass
+  
+  def menuloop(self):
+    pass
+
+  def mainloop(self):
+    while True:
+      if self.state == "menu":
+        self.menuloop()
+

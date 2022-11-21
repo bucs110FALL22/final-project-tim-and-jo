@@ -6,14 +6,14 @@ Monster and Boss classes were scrapped for this Enemy class (combined both)
 
 
 class Enemy(pygame.sprite.Sprite):
-  def __init__(self, base=5, buff=1, atk=10, defense=10, speed=3):
+  def __init__(self, base=5, buff=1, atk=10, defense=10, speed=3,type_enemy="slime"):
     super().____init__(self)
     self.base_LVL = 5
     self.HP = 200 * self.base_LVL or self.buff_LVL
     self.buff_LVL = self.base_LVL + player.LVL
     self.atk = 10 * self.base_LVL or self.buff_LVL
     self.defense = 10 * self.base_LVL or self.buff_LVL
-    self.image = pygame.image.load("Goblin / minotaur / boss monster.png").convert_alpha()
+    self.image = pygame.image.load(f"assets/{type_enemy}.png").convert_alpha()
     self.speed = 3
     self.rect = self.image.get_rect()
   def movement(self, player):
