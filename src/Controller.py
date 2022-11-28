@@ -1,6 +1,7 @@
 # The controller
 # Extremely basic for now - flush out later
 import pygame
+import json
 
 class Controller:
   def __init__(self):
@@ -20,6 +21,9 @@ class Controller:
     """
     pass
   
+  def gameloop(self):
+    pass
+
   def menuloop(self):
     pass
 
@@ -27,4 +31,6 @@ class Controller:
     while True:
       if self.state == "menu":
         self.menuloop()
+      if self.state == "game":
+        self.gameloop()
 
