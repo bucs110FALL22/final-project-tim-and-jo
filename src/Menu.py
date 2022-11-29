@@ -1,4 +1,5 @@
 import Button
 
 class Menu():
-    pass
+    playbutton = Button.Button()
+    

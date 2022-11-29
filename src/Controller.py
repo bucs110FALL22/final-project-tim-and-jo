@@ -28,6 +28,7 @@ class Controller:
     pass
 
   def mainloop(self):
+    print("I Lived")
     while True:
       if self.state == "menu":
         self.menuloop()
