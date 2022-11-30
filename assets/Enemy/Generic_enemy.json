@@ -1,0 +1,14 @@
+{
+    "Class":Monster,
+    "Class":Goblin,
+    "Class":Cyclopes,
+    "Class":Boss,
+    "Class":Soldier,
+    "Class":Commander,
+    "Class":Monster,
+    "Class":Messenger,
+    "HP":10,
+    "MP":10,
+    "ATK":10,
+    "DEF":10
+}
