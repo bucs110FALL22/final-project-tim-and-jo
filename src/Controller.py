@@ -3,8 +3,8 @@
 # I now understand why programmers have many monitors in many orientations
 import pygame
 import json
-import src.Menu
 import src.Button
+
 class Controller:
   def __init__(self):
     """
@@ -14,12 +14,13 @@ class Controller:
     """
     pygame.init()
     self.screen = pygame.display.set_mode()
+    self.width, self.height = pygame.display.get_window_size()
     self.fillbackground = pygame.Surface(pygame.display.get_window_size())
-    self.fillbackground.fill((150,150,250))
+    self.fillbackground.fill((255,255,255))
     self.state = "menu"
     # ministate is intended to only be used in gameplay/ in the game loop
     # to call certain functions that only make sense within gameplay
-    self.ministate = "none"
+    # self.ministate = "none"
 
   def mainloop(self):
     """
@@ -28,11 +29,8 @@ class Controller:
     return: None
     """
     print("I Lived")
+  
     while True:
-      events = pygame.event.get()
-      for events in events:
-        if events.type == pygame.QUIT:
-          exit()
       if self.state == "menu":
         self.menuloop()
       elif self.state == "game":
@@ -44,19 +42,33 @@ class Controller:
     args: self
     return: none
     """
-    print("In Game Loop")
-    self.state = input("Change Loop To:")
-
+    self.screen.fill((150,105,90))
+    pygame.display.update()
+    pygame.time.wait(1000)
+    self.state = "menu"
   def menuloop(self):
     """
     Loop that controls the start screen/menu
     args: self
     return: None
     """
-    print("In Menu Loop")
-    playbutton = src.Button.Button()
+
+    self.playbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) - 50 ,"Play",(10,10))
+    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"quit",(10,10))
     self.screen.blit(self.fillbackground,(0,0))
-    self.fillbackground.blit(playbutton.image,playbutton.rect)
+    self.fillbackground.blit(self.playbutton.image,self.playbutton.rect)
+    self.fillbackground.blit(self.quitbutton.image,self.quitbutton.rect)
+    events = pygame.event.get()
+    for events in events:
+      if events.type == pygame.MOUSEBUTTONDOWN:
+        if self.quitbutton.rect.collidepoint(events.pos):
+          exit()
+        if self.playbutton.rect.collidepoint(events.pos):
+          self.playbutton
+          self.quitbutton
+          self.state = "game"
+          print("Something has gone wrong if I am here")
+        
     pygame.display.update()
 
 
