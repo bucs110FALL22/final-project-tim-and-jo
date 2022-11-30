@@ -1,4 +1,5 @@
 import pygame
+import json
 class Player(pygame.sprite.Sprite):
   def __init__(self,HP=100,MP=100,ATK=50,DEF=20,SPD=1):
     super().__init__(self)
