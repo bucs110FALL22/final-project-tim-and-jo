@@ -54,7 +54,9 @@ class Controller:
     return: None
     """
     print("In Menu Loop")
-    src.Menu.Menu()
+    playbutton = src.Button.Button()
+    self.screen.blit(self.fillbackground,(0,0))
+    self.fillbackground.blit(playbutton.image,playbutton.rect)
     pygame.display.update()
 
 
