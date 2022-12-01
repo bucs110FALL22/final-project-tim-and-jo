@@ -1,15 +1,15 @@
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 # CS110 Project Proposal
-# << Project Title >>
+# A Ripoff of Fire Emblem
 ## CS 110 Final Project
 ### Fall Semester, 2022
 ### [Assignment Description](https://docs.google.com/document/d/1H4R6yLL7som1lglyXWZ04RvTp_RvRFCCBn6sqv-82ps/edit?usp=sharing)
 
-<< [[repl](#)](https://replit.com/join/mdpcukgnro-jo-cheungcheung) >>
+[repl](#)](https://replit.com/join/mdpcukgnro-jo-cheungcheung)
 
 << [link to demo presentation slides](#) >>
 
-### Team: << team name >>
+### Team: 12
 #### Jo Cheung Wong, Tim Zheng
 ***
 
@@ -71,4 +71,3 @@ The Project is broken down into the following file structure:
 |----------------------|:--------------------:|----------------------------------:|
 |  1                   | Run Counter Program  |GUI window appears with count = 0  |
 |  2                   | click count button   | display changes to count = 1      |
-etc...

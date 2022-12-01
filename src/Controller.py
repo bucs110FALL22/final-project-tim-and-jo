@@ -54,7 +54,7 @@ class Controller:
     """
 
     self.playbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) - 50 ,"Play",(10,10))
-    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"quit",(10,10))
+    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"Quit",(10,10))
     self.screen.blit(self.fillbackground,(0,0))
     self.fillbackground.blit(self.playbutton.image,self.playbutton.rect)
     self.fillbackground.blit(self.quitbutton.image,self.quitbutton.rect)
