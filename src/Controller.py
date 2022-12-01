@@ -29,7 +29,8 @@ class Controller:
     return: None
     """
     print("I Lived")
-  
+    self.playbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) - 50 ,"Play",(10,10))
+    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"Quit",(10,10))
     while True:
       if self.state == "menu":
         self.menuloop()
@@ -54,21 +55,20 @@ class Controller:
     return: None
     """
 
-    self.playbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) - 50 ,"Play",(10,10))
-    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"Quit",(10,10))
-    self.screen.blit(self.fillbackground,(0,0))
-    self.fillbackground.blit(self.playbutton.image,self.playbutton.rect)
-    self.fillbackground.blit(self.quitbutton.image,self.quitbutton.rect)
-    events = pygame.event.get()
-    for events in events:
-      if events.type == pygame.MOUSEBUTTONDOWN:
-        if self.quitbutton.rect.collidepoint(events.pos):
-          exit()
-        if self.playbutton.rect.collidepoint(events.pos):
-          self.playbutton.clearbutton()
-          self.quitbutton.clearbutton()
-          self.state = "game"
-          print("Something has gone wrong if I am here")
+    while self.state == "menu":
+      self.screen.blit(self.fillbackground,(0,0))
+      self.fillbackground.blit(self.playbutton.image,self.playbutton.rect)
+      self.fillbackground.blit(self.quitbutton.image,self.quitbutton.rect)
+      events = pygame.event.get()
+      for events in events:
+        if events.type == pygame.MOUSEBUTTONDOWN:
+          if self.quitbutton.rect.collidepoint(events.pos):
+            exit()
+          if self.playbutton.rect.collidepoint(events.pos):
+            self.playbutton.clearbutton()
+            self.quitbutton.clearbutton()
+            self.state = "game"
+            print("Something has gone wrong if I am here")
         
     pygame.display.update()
 
