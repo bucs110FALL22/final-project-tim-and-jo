@@ -42,6 +42,7 @@ class Controller:
     args: self
     return: none
     """
+
     self.screen.fill((150,105,90))
     pygame.display.update()
     pygame.time.wait(1000)
@@ -64,8 +65,8 @@ class Controller:
         if self.quitbutton.rect.collidepoint(events.pos):
           exit()
         if self.playbutton.rect.collidepoint(events.pos):
-          self.playbutton
-          self.quitbutton
+          self.playbutton.clearbutton()
+          self.quitbutton.clearbutton()
           self.state = "game"
           print("Something has gone wrong if I am here")
         

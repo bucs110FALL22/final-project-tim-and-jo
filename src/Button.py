@@ -20,3 +20,7 @@ class Button(pygame.sprite.Sprite):
         self.textpos = textpos
         self.text = pygame.font.SysFont(None,24).render(text, True, text_color)
         self.image.blit(self.text, textpos)
+
+    def clearbutton(self):
+        self.width,self.height = (0,0)
+        self.rect.x,self.rect.y = (0,0)
