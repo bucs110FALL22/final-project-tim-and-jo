@@ -53,16 +53,14 @@ class Controller:
     """
 
     self.screen.blit(self.fillbackground,(0,0))
-
-    self.player.rect.x = 256
-    self.player.rect.y = 256
-    self.screen.blit(self.player.image,self.player.rect)
+    self.fillbackground.blit(self.player.image,self.player.rect)
     events = pygame.event.get()
     for event in events:
-      if event == pygame.K_p:
-        self.change_state("menu")
-      elif event == pygame.K_w:
-        self.player.up()
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_p:
+          self.change_state("menu")
+        elif event == pygame.K_w:
+          self.player.up()
       pygame.display.flip() 
 
 
