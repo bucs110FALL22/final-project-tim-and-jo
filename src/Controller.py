@@ -6,6 +6,9 @@ import json
 import src.Button
 import pygame_menu
 import src.Player
+import random
+import src.Background
+
 class Controller:
   def __init__(self):
     """
@@ -15,8 +18,9 @@ class Controller:
     """
     pygame.init()
     self.player = src.Player.Player()
+    self.background = src.Background.Background("assets/Tiles/Map 1 sprite.png","assets/Tiles/Map 1 sprite.png","assets/Tiles/Map 1 sprite.png")
     self.screen = pygame.display.set_mode()
-    self.width, self.height = pygame.display.get_window_size()
+    self.width, self.height = self.screen.get_size()
     self.fillbackground = pygame.Surface(pygame.display.get_window_size())
     self.fillbackground.fill((255,255,255))
     self.state = "menu"
@@ -32,6 +36,10 @@ class Controller:
     self.state = state
     return self.state
 
+  def scaleimage(self):
+    self.fillbackground = pygame.transform.scale(self.fillbackground,(self.height,self.width))
+    pygame.display.update()
+  
   def mainloop(self):
     """
     Big loop that controls all other subloops
@@ -51,12 +59,16 @@ class Controller:
     args: self
     return: none
     """
-
+    onlyonetime = 0
+    while onlyonetime ==0:
+      self.scaleimage()
+      onlyonetime +=1
+    
     self.screen.blit(self.fillbackground,(0,0))
-    self.player.rect.x = 256
-    self.player.rect.y = 256
-    self.fillbackground.blit(self.player.image,self.player.rect)
-
+    self.player.rect.x = self.width/2
+    self.player.rect.y = self.height/2
+    self.screen.blit(self.player.image,self.player.rect)
+    self.screen.blit(self.background.background, self.background.rect)
     events = pygame.event.get()
     for event in events:
       if event.type == pygame.KEYDOWN:
@@ -81,7 +93,22 @@ class Controller:
     
     pygame.display.update()
 
-      
+  def fight(self):
+    while encounter == True:
+      if pygame.sprite.groupcollide(Player, Enemy) == True:
+        enemy.hp = enemy.hp - player.atk
+        if enemy.hp >=0:
+          enemy.kill()
+        if player.hp >= 0:
+          player.kill()
+        else: 
+          atk_roll = randrange(3)
+          if atk_roll == 0:
+            player.hp = player.hp - enemy.atk
+          if atk_roll == 1:
+            player.hp = player.hp - (enemy.atk * 1.5)
+          if atk_roll == 2:
+            player.hp = player.hp - (enemy.atk * 2)
 
 
   # def pauseloop(self):

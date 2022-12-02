@@ -1,13 +1,13 @@
 import pygame
 import json
 class Player(pygame.sprite.Sprite):
-  def __init__(self,HP=100,MP=100,ATK=50,DEF=20,SPD=50):
+  def __init__(self,HP=100,MP=100,ATK=50,DEF=20,SPD=50,image="assets/Player/Mlord sprite.png"):
     super().__init__()
     self.HP = HP
     self.MP = MP
     self.atk = ATK
     self.defense = DEF
-    self.image = pygame.image.load("assets/Player/Player.png")
+    self.image = pygame.image.load(image)
     self.rect = self.image.get_rect()
     self.speed = SPD
   def up(self):
