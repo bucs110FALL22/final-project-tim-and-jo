@@ -88,6 +88,8 @@ class Controller:
     self.screen.blit(self.enemy.image,self.enemy.rect)
     self.screen.blit(self.bigger_enemy.image,self.bigger_enemy.rect)
     events = pygame.event.get()
+    if pygame.sprite.groupcollide(Player, Enemy) == True:
+      self.fight()
     for event in events:
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_p:
