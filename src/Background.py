@@ -7,6 +7,7 @@ class Background(pygame.sprite.Sprite):
     """
     super().__init__()
     self.background = pygame.image.load(primary_image)
+    self.backgroundconvert = pygame.image.load(primary_image)
     self.overlay = pygame.image.load(overlay_image)
     self.animated = pygame.image.load(animated_image)
     self.rect = self.background.get_rect()

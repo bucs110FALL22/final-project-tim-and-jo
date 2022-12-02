@@ -37,12 +37,13 @@ class Controller:
     return self.state
 
   def scaleimage(self):
-    #self.scale = self.fillbackground.get()
-    # self.fillbackground = 
-    self.background = pygame.transform.chop(self.fillbackground,self.background.rect)
-    
+  #  self.scale = self.backgroundconvert.get()
+  #  self.backgroundconvert = pygame.transform.scale(int(self.scale([0]))*2, int(self.scale([1]))*2)
+    # self.background.background = pygame.transform.chop(self.fillbackground,self.background.rect)
 
-  
+    self.image = pygame.image.load("assets/Tiles/Map 1 sprite.png")
+    self.image = pygame.transform.scale(self.image, (self.width, self.height))
+
   def mainloop(self):
     """
     Big loop that controls all other subloops
@@ -58,29 +59,56 @@ class Controller:
 
   def gameloop(self):
     """
-    Loop that controls gameplay
+    Loop that sets up and controls gameplay
     args: self
     return: none
     """
     
     self.screen.blit(self.fillbackground,(0,0))
-    self.player.rect.x = self.width/2
-    self.player.rect.y = self.height/2
     onlyonetime = 0
     while onlyonetime ==0:
       self.scaleimage()
+      self.player.rect.x = self.width/2
+      self.player.rect.y = self.height/2
+      self.screen.blit(self.image, self.background.rect)
+      self.screen.blit(self.player.image,self.player.rect)
       onlyonetime +=1
-    self.screen.blit(self.player.image,self.player.rect)
-    self.screen.blit(self.background.background, self.background.rect)
     events = pygame.event.get()
     for event in events:
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_p:
           self.change_state("menu")
-        elif event.key == pygame.K_w:
-          self.player.rect.y += -50
-
-    pygame.display.update() 
+      if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_LEFT:
+          self.player.move_left = True
+        if event.key == pygame.K_RIGHT:
+          self.player.move_right = True
+        if event.key == pygame.K_UP:
+          self.player.move_up = True
+        if event.key == pygame.K_DOWN:
+          self.player.move_down = True
+#      elif event.type == pygame.KEYUP:
+#        if event.key == pygame.K_LEFT:
+#          self.player.move_left = False
+#        if event.key == pygame.K_RIGHT:
+#          self.player.move_right = False
+#        if event.key == pygame.K_UP:
+#          self.player.move_up = False
+#        if event.key == pygame.K_DOWN:
+#          self.player.move_down = False
+    if(self.player.move_left):
+      self.player.left()
+      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
+    if(self.player.move_right):
+      self.player.right()
+      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.x))
+    if(self.player.move_up):
+      self.player.up()
+      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
+    if(self.player.move_down):
+      self.player.down()
+      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
+    pygame.display.update()
 
 
   def menuloop(self):
@@ -96,22 +124,23 @@ class Controller:
     
     pygame.display.update()
 
-  def fight(self):
-    while encounter == True:
-      if pygame.sprite.groupcollide(Player, Enemy) == True:
-        enemy.hp = enemy.hp - player.atk
-        if enemy.hp >=0:
-          enemy.kill()
-        if player.hp >= 0:
-          player.kill()
-        else: 
-          atk_roll = randrange(3)
-          if atk_roll == 0:
-            player.hp = player.hp - enemy.atk
-          if atk_roll == 1:
-            player.hp = player.hp - (enemy.atk * 1.5)
-          if atk_roll == 2:
-            player.hp = player.hp - (enemy.atk * 2)
+  
+  # def fight(self):
+  #   while encounter == True:
+  #     if pygame.sprite.groupcollide(Player, Enemy) == True:
+  #       enemy.hp = enemy.hp - player.atk
+  #       if enemy.hp >=0:
+  #         enemy.kill()
+  #       if player.hp >= 0:
+  #         player.kill()
+  #       else: 
+  #         atk_roll = randrange(3)
+  #         if atk_roll == 0:
+  #           player.hp = player.hp - enemy.atk
+  #         if atk_roll == 1:
+  #           player.hp = player.hp - (enemy.atk * 1.5)
+  #         if atk_roll == 2:
+  #           player.hp = player.hp - (enemy.atk * 2)
 
 
   # def pauseloop(self):
