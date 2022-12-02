@@ -65,49 +65,24 @@ class Controller:
     """
     
     self.screen.blit(self.fillbackground,(0,0))
-    onlyonetime = 0
-    while onlyonetime ==0:
-      self.scaleimage()
-      self.player.rect.x = self.width/2
-      self.player.rect.y = self.height/2
-      self.screen.blit(self.image, self.background.rect)
-      self.screen.blit(self.player.image,self.player.rect)
-      onlyonetime +=1
+
+    self.scaleimage()
+    self.screen.blit(self.image, self.background.rect)
+    self.screen.blit(self.player.image,self.player.rect)
     events = pygame.event.get()
     for event in events:
       if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_p:
           self.change_state("menu")
-      if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_LEFT:
-          self.player.move_left = True
-        if event.key == pygame.K_RIGHT:
-          self.player.move_right = True
-        if event.key == pygame.K_UP:
-          self.player.move_up = True
-        if event.key == pygame.K_DOWN:
-          self.player.move_down = True
-#      elif event.type == pygame.KEYUP:
-#        if event.key == pygame.K_LEFT:
-#          self.player.move_left = False
-#        if event.key == pygame.K_RIGHT:
-#          self.player.move_right = False
-#        if event.key == pygame.K_UP:
-#          self.player.move_up = False
-#        if event.key == pygame.K_DOWN:
-#          self.player.move_down = False
-    if(self.player.move_left):
-      self.player.left()
-      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
-    if(self.player.move_right):
-      self.player.right()
-      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.x))
-    if(self.player.move_up):
-      self.player.up()
-      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
-    if(self.player.move_down):
-      self.player.down()
-      self.screen.blit(self.player.image,(self.player.rect.x, self.player.rect.y))
+        elif event.key == pygame.K_LEFT:
+          self.player.left()
+        elif event.key == pygame.K_RIGHT:
+          self.player.right()
+        elif event.key == pygame.K_UP:
+          self.player.up()
+        elif event.key == pygame.K_DOWN:
+          self.player.down()    
+    self.screen.blit(self.player.image,self.player.rect)
     pygame.display.update()
 
 
