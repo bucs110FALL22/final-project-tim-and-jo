@@ -4,7 +4,8 @@
 import pygame
 import json
 import src.Button
-
+import pygame_menu
+import src.Player
 class Controller:
   def __init__(self):
     """
@@ -13,14 +14,23 @@ class Controller:
     return: none
     """
     pygame.init()
+    self.player = src.Player.Player()
     self.screen = pygame.display.set_mode()
     self.width, self.height = pygame.display.get_window_size()
     self.fillbackground = pygame.Surface(pygame.display.get_window_size())
     self.fillbackground.fill((255,255,255))
     self.state = "menu"
+    self.menu = pygame_menu.Menu(title="HELP MEEEEE",width=self.width,height=self.height,theme=pygame_menu.themes.THEME_BLUE)
+    self.menu.add.label("Play Me",max_char=-1,font_size=14)
+    self.menu.add.button("Play",self.change_state,"game")
+    self.menu.add.button("Quit",pygame_menu.events.EXIT)
     # ministate is intended to only be used in gameplay/ in the game loop
     # to call certain functions that only make sense within gameplay
     # self.ministate = "none"
+
+  def change_state(self,state):
+    self.state = state
+    return self.state
 
   def mainloop(self):
     """
@@ -29,8 +39,6 @@ class Controller:
     return: None
     """
     print("I Lived")
-    self.playbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) - 50 ,"Play",(10,10))
-    self.quitbutton = src.Button.Button(50,50,[0,0,0],self.width/2,(self.height/2) + 50 ,"Quit",(10,10))
     while True:
       if self.state == "menu":
         self.menuloop()
@@ -44,33 +52,34 @@ class Controller:
     return: none
     """
 
-    self.screen.fill((150,105,90))
-    pygame.display.update()
-    pygame.time.wait(1000)
-    self.state = "menu"
+    self.screen.blit(self.fillbackground,(0,0))
+
+    self.player.rect.x = 256
+    self.player.rect.y = 256
+    self.screen.blit(self.player.image,self.player.rect)
+    events = pygame.event.get()
+    for event in events:
+      if event == pygame.K_p:
+        self.change_state("menu")
+      elif event == pygame.K_w:
+        self.player.up()
+      pygame.display.flip() 
+
+
   def menuloop(self):
     """
     Loop that controls the start screen/menu
     args: self
     return: None
     """
-
-    while self.state == "menu":
-      self.screen.blit(self.fillbackground,(0,0))
-      self.fillbackground.blit(self.playbutton.image,self.playbutton.rect)
-      self.fillbackground.blit(self.quitbutton.image,self.quitbutton.rect)
-      events = pygame.event.get()
-      for events in events:
-        if events.type == pygame.MOUSEBUTTONDOWN:
-          if self.quitbutton.rect.collidepoint(events.pos):
-            exit()
-          if self.playbutton.rect.collidepoint(events.pos):
-            self.playbutton.clearbutton()
-            self.quitbutton.clearbutton()
-            self.state = "game"
-            print("Something has gone wrong if I am here")
-        
+    events = pygame.event.get()
+    if self.menu.is_enabled():
+      self.menu.update(events)
+      self.menu.draw(self.screen)
+    
     pygame.display.update()
+
+      
 
 
   # def pauseloop(self):
