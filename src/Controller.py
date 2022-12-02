@@ -37,8 +37,11 @@ class Controller:
     return self.state
 
   def scaleimage(self):
-    self.fillbackground = pygame.transform.scale(self.fillbackground,(self.height,self.width))
-    pygame.display.update()
+    #self.scale = self.fillbackground.get()
+    # self.fillbackground = 
+    self.background = pygame.transform.chop(self.fillbackground,self.background.rect)
+    
+
   
   def mainloop(self):
     """
@@ -59,14 +62,14 @@ class Controller:
     args: self
     return: none
     """
-    onlyonetime = 0
-    while onlyonetime ==0:
-      self.scaleimage()
-      onlyonetime +=1
     
     self.screen.blit(self.fillbackground,(0,0))
     self.player.rect.x = self.width/2
     self.player.rect.y = self.height/2
+    onlyonetime = 0
+    while onlyonetime ==0:
+      self.scaleimage()
+      onlyonetime +=1
     self.screen.blit(self.player.image,self.player.rect)
     self.screen.blit(self.background.background, self.background.rect)
     events = pygame.event.get()
