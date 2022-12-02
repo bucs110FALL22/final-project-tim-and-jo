@@ -8,6 +8,7 @@ import pygame_menu
 import src.Player
 import random
 import src.Background
+import src.Enemy
 
 class Controller:
   def __init__(self):
@@ -17,21 +18,35 @@ class Controller:
     return: none
     """
     pygame.init()
-    self.player = src.Player.Player()
-    self.background = src.Background.Background("assets/Tiles/Map 1 sprite.png","assets/Tiles/Map 1 sprite.png","assets/Tiles/Map 1 sprite.png")
     self.screen = pygame.display.set_mode()
     self.width, self.height = self.screen.get_size()
+    self.player = src.Player.Player()
+    self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width/2 + random.randrange(10,50),y=self.height/3 + random.randrange(10, 50))
+    self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width/2,y=self.height/15)
+    self.background = src.Background.Background("assets/Tiles/fe8map6.png")
+
     self.fillbackground = pygame.Surface(pygame.display.get_window_size())
     self.fillbackground.fill((255,255,255))
     self.state = "menu"
     self.menu = pygame_menu.Menu(title="HELP MEEEEE",width=self.width,height=self.height,theme=pygame_menu.themes.THEME_BLUE)
-    self.menu.add.label("Play Me",max_char=-1,font_size=14)
+    self.menu.add.text_input("Name:",default='Pindor')
+    self.menu.add.label("A extremely small attempt at a fire emblem style game",max_char=-1,font_size=24)
     self.menu.add.button("Play",self.change_state,"game")
     self.menu.add.button("Quit",pygame_menu.events.EXIT)
     # ministate is intended to only be used in gameplay/ in the game loop
     # to call certain functions that only make sense within gameplay
     # self.ministate = "none"
 
+  def player_convert_alpha(self):
+    self.player.image.set_colorkey([255, 174, 201])
+    self.player.image.convert_alpha()
+    
+  def enemy_convert_alpha(self):
+    self.enemy.image.set_colorkey([255, 174, 201])
+    self.enemy.image.convert_alpha()
+    self.bigger_enemy.image.set_colorkey([255, 174, 201])
+    self.bigger_enemy.image.convert_alpha()
+  
   def change_state(self,state):
     self.state = state
     return self.state
@@ -41,7 +56,7 @@ class Controller:
   #  self.backgroundconvert = pygame.transform.scale(int(self.scale([0]))*2, int(self.scale([1]))*2)
     # self.background.background = pygame.transform.chop(self.fillbackground,self.background.rect)
 
-    self.image = pygame.image.load("assets/Tiles/Map 1 sprite.png")
+    self.image = pygame.image.load("assets/Tiles/fe8map6.png")
     self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
   def mainloop(self):
@@ -65,10 +80,13 @@ class Controller:
     """
     
     self.screen.blit(self.fillbackground,(0,0))
-
+    self.player_convert_alpha()
+    self.enemy_convert_alpha()
     self.scaleimage()
     self.screen.blit(self.image, self.background.rect)
     self.screen.blit(self.player.image,self.player.rect)
+    self.screen.blit(self.enemy.image,self.enemy.rect)
+    self.screen.blit(self.bigger_enemy.image,self.bigger_enemy.rect)
     events = pygame.event.get()
     for event in events:
       if event.type == pygame.KEYDOWN:
@@ -100,23 +118,12 @@ class Controller:
     pygame.display.update()
 
   
-  # def fight(self):
-  #   while encounter == True:
-  #     if pygame.sprite.groupcollide(Player, Enemy) == True:
-  #       enemy.hp = enemy.hp - player.atk
-  #       if enemy.hp >=0:
-  #         enemy.kill()
-  #       if player.hp >= 0:
-  #         player.kill()
-  #       else: 
-  #         atk_roll = randrange(3)
-  #         if atk_roll == 0:
-  #           player.hp = player.hp - enemy.atk
-  #         if atk_roll == 1:
-  #           player.hp = player.hp - (enemy.atk * 1.5)
-  #         if atk_roll == 2:
-  #           player.hp = player.hp - (enemy.atk * 2)
-
+  def fight(self):
+        self.enemy.hp = self.enemy.hp - self.player.atk
+        self.player.rect.x = self.player.rect.x + random.randrange(-20, 20)
+        self.player.rect.y = self.player.rect.y + random.randrange(-20,20)
+        if self.enemy.hp <=0:
+          self.enemy.death()
 
   # def pauseloop(self):
   #   """
