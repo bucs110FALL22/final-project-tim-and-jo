@@ -160,7 +160,7 @@ class Controller:
       self.screen.blit(img, (20*x, 20*x))
       x+= 1
       pygame.display.update()
-      pygame.time.wait(1000)
+      pygame.time.wait(2500)
     dialougefile.close()
     self.player_name_save(self.name)
     exit()
