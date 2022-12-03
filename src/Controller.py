@@ -43,13 +43,13 @@ class Controller:
     """
     print(name)
     file = open("assets/Player/RecordofPersons.json")
-    HOF = json.load(file)
-    print(HOF)
+    hof = json.load(file)
+    print(hof)
     file = open("assets/Player/RecordofPersons.json","w")
     date = time.strftime("%m/%d/%Y")
-    HOF.update({name:f"{name} vanquished the great demon on {date}"})
-    print(HOF)
-    json.dump(HOF,file)
+    hof.update({name:f"{name} vanquished the great demon on {date}"})
+    print(hof)
+    json.dump(hof,file)
     file.close()
   
   def change_state(self,state):
@@ -112,7 +112,6 @@ class Controller:
     args: self
     return: None
     """
-
     events = pygame.event.get()
     if self.menu.is_enabled():
       self.menu.update(events)
