@@ -13,7 +13,7 @@ import time
 class Controller:
   def __init__(self):
     """
-    Initializes pygame and the game
+    Initializes pygame and the game - quite long due to need to initialize many objects
     args: self
     return: none
     """
@@ -25,7 +25,6 @@ class Controller:
     self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width/2 + random.randrange(10,50),y=self.height/3 + random.randrange(10, 50))
     self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width/2,y=self.height/15,hp=15)
     self.background = src.Background.Background("assets/Tiles/fe8map6.png")
-
     self.fillbackground = pygame.Surface(pygame.display.get_window_size())
     self.fillbackground.fill((255,255,255))
     self.state = "menu"
@@ -96,7 +95,6 @@ class Controller:
     args: self
     return: None
     """
-    print("I Lived")
     while True:
       if self.state == "menu":
         self.menuloop()
@@ -106,11 +104,10 @@ class Controller:
         self.winloop()
   def gameloop(self):
     """
-    Loop that sets up and controls gameplay
+    Loop that sets up and controls gameplay - large due to needing to render game elements
     args: self
     return: none
     """
-    
     self.screen.blit(self.fillbackground,(0,0))
     self.player_convert_alpha()
     self.enemy_convert_alpha()
@@ -122,8 +119,6 @@ class Controller:
     events = pygame.event.get()
     collide = pygame.sprite.groupcollide(self.player_group,self.enemy_group,False,False)
     for s in collide:
-      print("I am colliding")
-      print(s)
       self.fight()
     for event in events:
       if event.type == pygame.KEYDOWN:
@@ -139,8 +134,6 @@ class Controller:
           self.player.down()    
     self.screen.blit(self.player.image,self.player.rect)
     pygame.display.update()
-
-
   def menuloop(self):
     """
     Loop that controls the start screen/menu
@@ -151,27 +144,25 @@ class Controller:
     if self.menu.is_enabled():
       self.menu.update(events)
       self.menu.draw(self.screen)
-    
     pygame.display.update()
 
-  
   def fight(self):
     """
     function that lets the player and enemies fight
     args: self
     return: none
     """
-      self.enemy.HP = self.enemy.HP - self.player.atk
+    self.enemy.HP = self.enemy.HP - self.player.atk
+    self.player.rect.x = self.player.rect.x + random.randrange(-50, 50)
+    self.player.rect.y = self.player.rect.y + random.randrange(-50,50)
+    if self.enemy.HP <=0:
+      self.enemy.death()
+      self.bigger_enemy.HP = self.bigger_enemy.HP - self.player.atk
       self.player.rect.x = self.player.rect.x + random.randrange(-50, 50)
       self.player.rect.y = self.player.rect.y + random.randrange(-50,50)
-      if self.enemy.HP <=0:
-        self.enemy.death()
-        self.bigger_enemy.HP = self.bigger_enemy.HP - self.player.atk
-        self.player.rect.x = self.player.rect.x + random.randrange(-50, 50)
-        self.player.rect.y = self.player.rect.y + random.randrange(-50,50)
-      if self.bigger_enemy.HP <=0:
-          self.bigger_enemy.death()
-          self.state = "winstate"
+    if self.bigger_enemy.HP <=0:
+        self.bigger_enemy.death()
+        self.state = "winstate"
 
   def winloop(self):
     """
@@ -186,7 +177,7 @@ class Controller:
       print(i)
       font = pygame.font.SysFont(None,24)
       msg = i
-      img = font.render(msg,True,[255,255,255])
+      img = font.render(msg,True,(209,188,0))
       self.screen.blit(img, (20*x, 20*x))
       x+= 1
       pygame.display.update()

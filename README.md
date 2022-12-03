@@ -5,9 +5,9 @@
 ### Fall Semester, 2022
 ### [Assignment Description](https://docs.google.com/document/d/1H4R6yLL7som1lglyXWZ04RvTp_RvRFCCBn6sqv-82ps/edit?usp=sharing)
 
-[repl](#)](https://replit.com/join/mdpcukgnro-jo-cheungcheung)
+[Repl](https://replit.com/join/mdpcukgnro-jo-cheungcheung)
 
-<< [link to demo presentation slides](#12) >>
+[Demo Slides](https://docs.google.com/presentation/d/1EzJeEtMkL8QF2dRZl_swCZaoDkbE_AoH3_Oo4zgj4_s/edit?usp=sharing)
 
 ### Team: 12
 #### Jo Cheung Wong, Tim Zheng
@@ -15,7 +15,7 @@
 
 ## Project Description
 
-<<Title Screen is where the user gets to deside the player's name and start the game. The game is really simple, using the arrow keys to move the player character to the monsters to attempt to fight it. Fighting will result in the monster losing HP till it dies and you move onto the demon lord to beat the game and you name will be recorded in a mini Hall of Fame.>>
+Title Screen is where the user gets to deside the player's name and start the game. The game is really simple, using the arrow keys to move the player character to the monsters to attempt to fight it. Fighting will result in the monster losing HP till it dies and you move onto the demon lord to beat the game and you name will be recorded in a mini Hall of Fame.
 
 ***    
 
@@ -75,7 +75,7 @@ The Project is broken down into the following file structure:
 
 ## Testing
 
-* << Describe your testing strategy for your project. >>
+Our testing strategy was fairly simple - implement one feature, test that feature, and repeat.
 
 ## ATP
 
@@ -84,5 +84,7 @@ The Project is broken down into the following file structure:
 |  1                   | Start Program  |Menu Screen appears where name can be entered, the game can be played, and the game can be quit |
 |  2                   | Choose Play   | changes to game screen where user assumes control of the Hero     |
 |3|  Arrow up to move up, arrow left to move left, arrow down to move down, arrow right to move right | moves Hero in corrisponding direction of arrow key pressed
-|4| All mosters are dead| Ending quote given by boss, name of user imputed in step 1 recording in Hall of Fame|
-|5| user Name is recording in HOF| pygame exits and the program ends|
+|4| Using the arrow keys, charge towards the smaller of the two monsters| Player is knocked back |
+|5| Repeatedly bash into the monster| The monster dies/disappears |
+|6| Repeat steps 4-5 except with the bigger monster| The big monster dies, but not before giving a speech. Control is taken away from the player|
+|7| Wait while your name is being recorded in the Hall of Fame| pygame exits and the program ends|
