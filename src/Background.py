@@ -6,10 +6,13 @@ class Background(pygame.sprite.Sprite):
     Initializes the background class and gives it attributes
     """
     super().__init__()
+    
     self.background = pygame.image.load(primary_image)
     self.backgroundconvert = pygame.image.load(primary_image)
     self.rect = self.background.get_rect()
 
+  def getscaledimage(self,targetsurface,width,height):
+    self.background = pygame.transform.scale(targetsurface,(width,height))
   # def replacebackground(self,new_primary_image=None):
     # """
     # Intended to replace the background should the need arise

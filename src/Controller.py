@@ -9,7 +9,7 @@ import random
 import src.Background
 import src.Enemy
 import time
-
+import src.Start_menu
 class Controller:
   def __init__(self):
     """
@@ -85,10 +85,6 @@ class Controller:
     self.state = state
     return self.state
 
-  def scaleimage(self):
-    self.image = pygame.image.load("assets/Tiles/fe8map6.png")
-    self.image = pygame.transform.scale(self.image, (self.width, self.height))
-
   def mainloop(self):
     """
     Big loop that controls all other subloops
@@ -111,8 +107,8 @@ class Controller:
     self.screen.blit(self.fillbackground,(0,0))
     self.player_convert_alpha()
     self.enemy_convert_alpha()
-    self.scaleimage()
-    self.screen.blit(self.image, self.background.rect)
+    self.background.getscaledimage(self.background.background,self.width,self.height)
+    self.screen.blit(self.background.background, self.background.rect)
     self.screen.blit(self.player.image,self.player.rect)
     self.screen.blit(self.enemy.image,self.enemy.rect)
     self.screen.blit(self.bigger_enemy.image,self.bigger_enemy.rect)
@@ -140,6 +136,7 @@ class Controller:
     args: self
     return: None
     """
+
     events = pygame.event.get()
     if self.menu.is_enabled():
       self.menu.update(events)
