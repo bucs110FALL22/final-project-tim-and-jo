@@ -1,13 +1,15 @@
 import pygame
 class Player(pygame.sprite.Sprite):
-  def __init__(self,ATK=1,SPD=10,image="assets/Player/Mlord sprite.png",x=250,y=250, *groups):
-    super().__init__(*groups)
+  def __init__(self,ATK=1,image="assets/Player/Mlord sprite.png",x=250,y=250):
+    super().__init__()
     self.atk = ATK
     self.image = pygame.image.load(image)
+    self.image.set_colorkey((255, 174, 201))
+    self.image = self.image.convert_alpha(self.image)
     self.rect = self.image.get_rect()
     self.rect.x =x
     self.rect.y =y
-    self.speed = SPD
+    self.speed = self.rect.width
   def up(self):
     self.rect.centery += -1*self.speed
   def down(self):

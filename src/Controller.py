@@ -18,15 +18,12 @@ class Controller:
     return: none
     """
     pygame.init()
-    self.alphacolor = (255, 174, 201)
     self.screen = pygame.display.set_mode()
     self.width, self.height = self.screen.get_size()
     self.player = src.Player.Player()
     self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width/2 + random.randrange(10,50),y=self.height/3 + random.randrange(10, 50))
     self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width/2,y=self.height/15,hp=15)
     self.background = src.Background.Background("assets/Tiles/fe8map6.png")
-    self.fillbackground = pygame.Surface(pygame.display.get_window_size())
-    self.fillbackground.fill((255,255,255))
     self.state = "menu"
     self.menu = pygame_menu.Menu(title="SmallGame",width=self.width,height=self.height,theme=pygame_menu.themes.THEME_BLUE)
     self.name = self.menu.add.text_input("Name:",default="Pindor").get_value()
@@ -54,27 +51,6 @@ class Controller:
     print(HOF)
     json.dump(HOF,file)
     file.close()
-
-    
-  def player_convert_alpha(self):
-    """
-    Makes player backgrounds transparent
-    args:self
-    return: none
-    """
-    self.player.image.set_colorkey(self.alphacolor)
-    self.player.image.convert_alpha()
-    
-  def enemy_convert_alpha(self):
-    """
-    Makes enemy backgrounds transparent
-    args: self
-    return:none
-    """
-    self.enemy.image.set_colorkey(self.alphacolor)
-    self.enemy.image.convert_alpha()
-    self.bigger_enemy.image.set_colorkey(self.alphacolor)
-    self.bigger_enemy.image.convert_alpha()
   
   def change_state(self,state):
     """
@@ -104,9 +80,7 @@ class Controller:
     args: self
     return: none
     """
-    self.screen.blit(self.fillbackground,(0,0))
-    self.player_convert_alpha()
-    self.enemy_convert_alpha()
+    self.screen.blit(self.screen,(0,0))
     self.background.getscaledimage(self.background.background,self.width,self.height)
     self.screen.blit(self.background.background, self.background.rect)
     self.screen.blit(self.player.image,self.player.rect)
@@ -127,7 +101,9 @@ class Controller:
         elif event.key == pygame.K_UP:
           self.player.up()
         elif event.key == pygame.K_DOWN:
-          self.player.down()    
+          self.player.down()
+
+
     self.screen.blit(self.player.image,self.player.rect)
     pygame.display.update()
   def menuloop(self):
@@ -174,8 +150,8 @@ class Controller:
       print(i)
       font = pygame.font.SysFont(None,24)
       msg = i
-      img = font.render(msg,True,(209,188,0))
-      self.screen.blit(img, (20*x, 20*x))
+      img = font.render(msg,True,(255,255,255))
+      self.screen.blit(img, ((self.width/2),(self.height/2)+(20*x)))
       x+= 1
       pygame.display.update()
       pygame.time.wait(2500)
