@@ -1,5 +1,4 @@
 import pygame
-import random
 """
 Monster and Boss classes were scrapped for this Enemy class (combined both)
 """
@@ -14,13 +13,15 @@ class Enemy(pygame.sprite.Sprite):
     self.type = type_enemy
     self.rect.x =x
     self.rect.y =y
-  def movement(self, player):
-    """
-    Moves the enemy
-    """
-    self.rect_x += self.speed + random.randrange(-10,10)
-    self.rect_y += self.speed + random.randrange(-10,10)
+#  def movement(self):
+#    """
+#    Moves the enemy
+#    self.rect_x += self.speed + random.randrange(-10,10)
+#    self.rect_y += self.speed + random.randrange(-10,10)
   def death(self):
+    """
+    Janky way to ensure that the enemy is dead and will not interact with the player
+    """
     self.image = pygame.image.load("assets/Enemy/dead.png")
     self.rect_x = 10000
     self.rect_y = 10000

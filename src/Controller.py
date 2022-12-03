@@ -40,6 +40,11 @@ class Controller:
     self.all_sprites.add(self.player_group, self.enemy_group)
 
   def player_name_save(self, name):
+    """
+    saves the name of the player to a json file
+    args: self, name
+    return: None
+    """
     print(name)
     file = open("assets/Player/RecordofPersons.json")
     HOF = json.load(file)
@@ -53,16 +58,31 @@ class Controller:
 
     
   def player_convert_alpha(self):
+    """
+    Makes player backgrounds transparent
+    args:self
+    return: none
+    """
     self.player.image.set_colorkey(self.alphacolor)
     self.player.image.convert_alpha()
     
   def enemy_convert_alpha(self):
+    """
+    Makes enemy backgrounds transparent
+    args: self
+    return:none
+    """
     self.enemy.image.set_colorkey(self.alphacolor)
     self.enemy.image.convert_alpha()
     self.bigger_enemy.image.set_colorkey(self.alphacolor)
     self.bigger_enemy.image.convert_alpha()
   
   def change_state(self,state):
+    """
+    Changes the state of the game
+    args: self,state
+    return: None
+    """
     self.state = state
     return self.state
 
@@ -136,6 +156,11 @@ class Controller:
 
   
   def fight(self):
+    """
+    function that lets the player and enemies fight
+    args: self
+    return: none
+    """
       self.enemy.HP = self.enemy.HP - self.player.atk
       self.player.rect.x = self.player.rect.x + random.randrange(-50, 50)
       self.player.rect.y = self.player.rect.y + random.randrange(-50,50)
@@ -149,6 +174,11 @@ class Controller:
           self.state = "winstate"
 
   def winloop(self):
+    """
+    Loop that takes control away from the player to play a cutscene
+    args: self
+    return: none
+    """
     dialougefile = open("assets/Enemy/Boss_dialouge.json")
     file=json.loads(dialougefile.read())
     x = 1
