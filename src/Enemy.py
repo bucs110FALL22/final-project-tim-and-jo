@@ -5,8 +5,8 @@ Monster and Boss classes were scrapped for this Enemy class (combined both)
 """
 
 class Enemy(pygame.sprite.Sprite):
-  def __init__(self,hp = 5, speed=10,type_enemy="Cyclope",x = 0,y = 0):
-    super().__init__()
+  def __init__(self,hp = 5, speed=10,type_enemy="Cyclope",x = 0,y = 0, *groups):
+    super().__init__(*groups)
     self.HP = hp
     self.image = pygame.image.load(f"assets/Enemy/{type_enemy}.png")
     self.speed = speed
@@ -24,4 +24,6 @@ class Enemy(pygame.sprite.Sprite):
     self.image = pygame.image.load("assets/Enemy/dead.png")
     self.rect_x = 10000
     self.rect_y = 10000
+    self.rect.width =0
+    self.rect.height = 0
     pass

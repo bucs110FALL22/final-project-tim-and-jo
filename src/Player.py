@@ -1,8 +1,8 @@
 import pygame
 import json
 class Player(pygame.sprite.Sprite):
-  def __init__(self,ATK=1,SPD=10,image="assets/Player/Mlord sprite.png",x=250,y=250):
-    super().__init__()
+  def __init__(self,ATK=5,SPD=20,image="assets/Player/Mlord sprite.png",x=250,y=250, *groups):
+    super().__init__(*groups)
     self.atk = ATK
     self.image = pygame.image.load(image)
     self.rect = self.image.get_rect()

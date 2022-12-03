@@ -1,6 +1,7 @@
 {
-  "Boss Dialouge": "You did well getting here and killing my minons and guards, but you will die, Here and   Now! Damn... I've been bested... I may die here but hear this... 
-there are more like me out there... 
-this is just the start young Hero...
-I'll see you on the other side..."
+  "Boss Dialouge":[
+    "Damn... I've been bested... I may die here but hear this...",
+    "There are more like me out there...",
+    "This is just the start young Hero...",
+    "I'll see you on the other side..."]
 }

@@ -1,13 +1,13 @@
 :warning: Everything between << >> needs to be replaced (remove << >> after replacing)
 # CS110 Project Proposal
-# A Ripoff of Fire Emblem
+# A Ripoff of Fire Emblem But Seriously it is
 ## CS 110 Final Project
 ### Fall Semester, 2022
 ### [Assignment Description](https://docs.google.com/document/d/1H4R6yLL7som1lglyXWZ04RvTp_RvRFCCBn6sqv-82ps/edit?usp=sharing)
 
 [repl](#)](https://replit.com/join/mdpcukgnro-jo-cheungcheung)
 
-<< [link to demo presentation slides](#) >>
+<< [link to demo presentation slides](#12) >>
 
 ### Team: 12
 #### Jo Cheung Wong, Tim Zheng
@@ -15,14 +15,16 @@
 
 ## Project Description
 
-<< Give an overview of your project >>
+<<Title Screen is where the user gets to deside the player's name and start the game. The game is really simple, using the arrow keys to move the player character to the monsters to attempt to fight it. Fighting will result in the monster losing HP till it dies and you move onto the demon lord to beat the game and you name will be recorded in a mini Hall of Fame.>>
 
 ***    
 
 ## User Interface Design
 
 - **Initial Concept**
-  - << A wireframe or drawing of the user interface concept along with a short description of the interface. You should have one for each screen in your program. For example, if your program has a start screen, game screen, and game over screen, you should include a wireframe / screenshot / drawing of each one and a short description of the components. >>
+  - << Menu screen: user decides their name of the player that will be listed in Hall of Fame before starting game.
+
+    >>
     
     
 - **Final GUI**
