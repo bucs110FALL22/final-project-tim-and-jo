@@ -26,7 +26,6 @@ class Controller:
     self.background = src.Background.Background("assets/Tiles/fe8map6.png")
     self.state = "menu"
     self.menu = pygame_menu.Menu(title="SmallGame",width=self.width,height=self.height,theme=pygame_menu.themes.THEME_BLUE)
-    self.name = self.menu.add.text_input("Name:",default="Pindor").get_value()
     self.menu.add.label("A small rpg game \n inspired by fire emblem",max_char=-1,font_size=24)
     self.menu.add.button("Play",self.change_state,"game")
     self.menu.add.button("Quit",pygame_menu.events.EXIT)
@@ -155,5 +154,5 @@ class Controller:
       pygame.display.update()
       pygame.time.wait(2500)
     dialougefile.close()
-    self.player_name_save(self.name)
+    self.player_name_save("self.menu")
     exit()
