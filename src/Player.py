@@ -1,4 +1,5 @@
 import pygame
+import src.Enemy
 class Player(pygame.sprite.Sprite):
   def __init__(self,ATK=1,image="assets/Player/Mlord sprite.png",x=250,y=250):
     super().__init__()
@@ -18,5 +19,5 @@ class Player(pygame.sprite.Sprite):
     self.rect.centerx += -1*self.speed
   def right(self):
     self.rect.centerx += self.speed
-  def update():
-    pass
+  # def attack(self,enemy=src.Enemy.Enemy):
+  #   enemy.HP = enemy.HP - self.atk

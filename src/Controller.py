@@ -9,8 +9,6 @@ import random
 import src.Background
 import src.Enemy
 import time
-import src.Start_menu
-
 
 class Controller:
 
@@ -24,22 +22,12 @@ class Controller:
     self.screen = pygame.display.set_mode()
     self.width, self.height = self.screen.get_size()
     self.player = src.Player.Player()
-    self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",
-                                 x=self.width / 2 + random.randrange(10, 50),
-                                 y=self.height / 3 + random.randrange(10, 50))
-    self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",
-                                        x=self.width / 2,
-                                        y=self.height / 15,
-                                        hp=15)
+    self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width / 2 + random.randrange(10, 50), y=self.height / 3 + random.randrange(10, 50))
+    self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width / 2,y=self.height / 15,hp=15)
     self.background = src.Background.Background("assets/Tiles/fe8map6.png")
     self.state = "menu"
-    self.menu = pygame_menu.Menu(title="SmallGame",
-                                 width=self.width,
-                                 height=self.height,
-                                 theme=pygame_menu.themes.THEME_BLUE)
-    self.menu.add.label("A small rpg game \n inspired by fire emblem",
-                        max_char=-1,
-                        font_size=24)
+    self.menu = pygame_menu.Menu(title="SmallGame",width=self.width,height=self.height, theme=pygame_menu.themes.THEME_BLUE)
+    self.menu.add.label("A small rpg game \n inspired by fire emblem",max_char=-1, font_size=24)
     self.menu.add.text_input(title="Name:", default="Pindor").get_value()
     self.menu.add.button("Play", self.change_state, "game")
     self.menu.add.button("Quit", pygame_menu.events.EXIT)
@@ -74,6 +62,13 @@ class Controller:
     self.state = state
     return self.state
 
+  def drawloop(self):
+    self.background.getscaledimage(self.background.background, self.width,self.height)
+    self.screen.blit(self.background.background, self.background.rect)
+    self.screen.blit(self.enemy.image, self.enemy.rect)
+    self.screen.blit(self.bigger_enemy.image, self.bigger_enemy.rect)
+    self.screen.blit(self.player.image, self.player.rect)
+
   def mainloop(self):
     """
     Big loop that controls all other subloops
@@ -94,16 +89,9 @@ class Controller:
     args: self
     return: none
     """
-    self.screen.blit(self.screen, (0, 0))
-    self.background.getscaledimage(self.background.background, self.width,
-                                   self.height)
-    self.screen.blit(self.background.background, self.background.rect)
-    self.screen.blit(self.player.image, self.player.rect)
-    self.screen.blit(self.enemy.image, self.enemy.rect)
-    self.screen.blit(self.bigger_enemy.image, self.bigger_enemy.rect)
     events = pygame.event.get()
-    collide = pygame.sprite.groupcollide(self.player_group, self.enemy_group,
-                                         False, False)
+    collide = pygame.sprite.groupcollide(self.player_group, self.enemy_group,False, False)
+    print(collide)
     for _ in collide:
       self.fight()
     for event in events:
@@ -118,8 +106,7 @@ class Controller:
           self.player.up()
         elif event.key == pygame.K_DOWN:
           self.player.down()
-
-    self.screen.blit(self.player.image, self.player.rect)
+    self.drawloop()
     pygame.display.update()
 
   def menuloop(self):
