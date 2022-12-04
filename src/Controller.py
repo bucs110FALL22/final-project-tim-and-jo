@@ -21,6 +21,7 @@ class Controller:
     pygame.init()
     self.screen = pygame.display.set_mode()
     self.width, self.height = self.screen.get_size()
+    self.rect = self.screen.get_rect()
     self.player = src.Player.Player()
     self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width / 2 + random.randrange(10, 50), y=self.height / 3 + random.randrange(10, 50))
     self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width / 2,y=self.height / 15,hp=15)
@@ -42,15 +43,13 @@ class Controller:
     args: self, name
     return: None
     """
-    print(name)
     file = open("assets/Player/RecordofPersons.json")
     hof = json.load(file)
-    print(hof)
     file = open("assets/Player/RecordofPersons.json", "w")
     date = time.strftime("%m/%d/%Y")
-    hof.update({name: f"{name} vanquished the great demon on {date}"})
-    print(hof)
-    json.dump(hof, file)
+    hourdate = time.strftime("%H")
+    hof.update({name: f"{name} vanquished the great demon on {date} on hour {hourdate}"})
+    json.dump(hof, file, indent=2)
     file.close()
 
   def change_state(self, state):
@@ -91,7 +90,6 @@ class Controller:
     """
     events = pygame.event.get()
     collide = pygame.sprite.groupcollide(self.player_group, self.enemy_group,False, False)
-    print(collide)
     for _ in collide:
       self.fight()
     for event in events:
@@ -143,6 +141,17 @@ class Controller:
       self.bigger_enemy.death()
       self.state = "winstate"
 
+  def halloffame(self):
+    # This fills the screen with a light grey color, to contrast the hall of fame text
+    self.screen.fill((155,155,155))
+    halloffamepesrons = json.load(open("assets/Player/RecordofPersons.json"))
+    halloffamepesrons = str(halloffamepesrons)
+    fontdisplay = pygame.font.SysFont(None,24)
+    image = fontdisplay.render(halloffamepesrons,True,(255,255,255))
+    self.screen.blit(image,(20,20))
+    pygame.display.update()
+    pygame.time.wait(5000)    
+
   def winloop(self):
     """
     Loop that takes control away from the player to play a cutscene
@@ -163,4 +172,5 @@ class Controller:
       pygame.time.wait(2500)
     dialougefile.close()
     self.player_name_save(self.name)
+    self.halloffame()
     exit()
