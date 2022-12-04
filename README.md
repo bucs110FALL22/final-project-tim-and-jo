@@ -45,7 +45,7 @@ Our design is similar to Fire Emblem the Sacred Stones as we pulled sprites and 
          - a short description of the module >>
 * Class Interface Design
     * << A simple drawing that shows the class relationships in your code (see below for an example). This does not need to be overly detailed, but should show how your code fits into the Model/View/Controller paradigm. >>
-        * ![class diagram](assets/Class_Diagram.png)
+        * ![class diagram](assets/Class_Diagram.jpeg)
 * Classes
     * <<Player: the Hero that the User controls, has movement with the arrow keys and has an objective to kill all monsters. Has an attack and speed stat to determine how far it moves when arrow keys are pressed and how much damage it can do to monsters when colliding with them
     * Enemy: the boss monster and regular Monster that threatens the Hero. Stationary and has HP stat and attack stat. Takes damage when colliding with Hero and pushs them back a random distance when countering. Boss monster is just a bigger and stronger version of the regular monster
