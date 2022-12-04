@@ -27,6 +27,7 @@ class Controller:
     self.state = "menu"
     self.menu = pygame_menu.Menu(title="SmallGame",width=self.width,height=self.height,theme=pygame_menu.themes.THEME_BLUE)
     self.menu.add.label("A small rpg game \n inspired by fire emblem",max_char=-1,font_size=24)
+    self.menu.add.text_input(title="Name:",default="Pindor").get_value()
     self.menu.add.button("Play",self.change_state,"game")
     self.menu.add.button("Quit",pygame_menu.events.EXIT)
     self.player_group = pygame.sprite.Group([self.player])
@@ -111,6 +112,11 @@ class Controller:
     args: self
     return: None
     """
+    namedict = self.menu.get_input_data()
+    name = namedict.popitem()
+    name = str(name)
+    self.name = name[24:(len(name)-2)]
+    print(self.name)
     events = pygame.event.get()
     if self.menu.is_enabled():
       self.menu.update(events)
@@ -154,5 +160,5 @@ class Controller:
       pygame.display.update()
       pygame.time.wait(2500)
     dialougefile.close()
-    self.player_name_save("self.menu")
+    self.player_name_save(self.name)
     exit()
