@@ -21,7 +21,6 @@ class Controller:
     pygame.init()
     self.screen = pygame.display.set_mode()
     self.width, self.height = self.screen.get_size()
-    self.rect = self.screen.get_rect()
     self.player = src.Player.Player()
     self.enemy = src.Enemy.Enemy(type_enemy="Cyclope sprite",x=self.width / 2 + random.randrange(10, 50), y=self.height / 3 + random.randrange(10, 50))
     self.bigger_enemy = src.Enemy.Enemy(type_enemy="DLord sprite",x=self.width / 2,y=self.height / 15,hp=15)
